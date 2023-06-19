@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
+//stless-stful
+
 void main() => runApp(MaterialApp(
   home: NinjaCard(),
 ));
 
-class NinjaCard extends StatelessWidget { //stless ile oluşturuldu
+
+class NinjaCard extends StatefulWidget {  @override
+  State<NinjaCard> createState() => _NinjaCardState();
+}
+
+int ninjaLevel = 0;
+
+class _NinjaCardState extends State<NinjaCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,6 +22,14 @@ class NinjaCard extends StatelessWidget { //stless ile oluşturuldu
         title: Text("Ninja ID Card", style: TextStyle(color: Colors.grey),),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          setState(() {
+            ninjaLevel += 1;
+          });
+        },
+        child: Icon(Icons.add),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0,40.0,30.0,0.0),
@@ -66,7 +83,7 @@ class NinjaCard extends StatelessWidget { //stless ile oluşturuldu
             SizedBox(height: 10.0,),
 
             Text(
-              "8 Lvl",
+              "$ninjaLevel",
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 letterSpacing: 2.0,
@@ -95,6 +112,30 @@ class NinjaCard extends StatelessWidget { //stless ile oluşturuldu
                 ),
               ],
             ),
+
+
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(90.0),
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      ninjaLevel += 5;
+                    });
+                  },
+                  child: Text(
+                    "+5 Level",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[800])
+                ),
+              ),
+            ),
+
+
           ],
         ),
       ),
